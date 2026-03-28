@@ -1,5 +1,7 @@
-# import sys
-# sys.path.append("../modal")
+# upload data, clean it, save to volume for training & inferenece
+# command to upload data: 
+# modal volume put storage /data/data_10k.csv /data_10k.csv
+# ex: modal volume put storage ~/Downloads/name-of--file.csv /data_10k.csv
 from common import *
 
 # define app for function to run in modal container
