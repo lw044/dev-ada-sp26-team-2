@@ -7,7 +7,6 @@ from common import *
     volumes = {"/data": volume}, # load data from volume
     timeout=3000
 )
-
 def train():
     import pandas as pd
     from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer
@@ -72,7 +71,7 @@ def train():
     model.save_pretrained("/data/model_weights")    # model's trained weights
     tokenizer.save_pretrained("/data/model_weights")    # tokenizer's rules
     volume.commit()
-
+    
 @app.local_entrypoint()
 def main():
     train.remote()
