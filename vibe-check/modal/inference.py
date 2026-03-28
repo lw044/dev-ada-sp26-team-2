@@ -21,12 +21,29 @@ class Inference:
     @modal.method()
     def predict(self, text: str):
         result = self.pipe(text)
-        return result
+
+        emotion = result[0]["label"]
+
+        return emotion
 
 @app.local_entrypoint()
 def main():
     inference = Inference()
-    print(inference.predict.remote("I am so happy today!"))
+    print(inference.predict.remote("I don't like pointers or trees!!!!!!!!"))
+    print(inference.predict.remote("No, you think?"))
+    print(inference.predict.remote("Bro I just failed my exam"))
+    print(inference.predict.remote("Gosh, it was SO embarrasing"))
+    print(inference.predict.remote("To whom it may concern, "))
+    print(inference.predict.remote("Priority Queues are used to organize heaps."))
+    print(inference.predict.remote("I'm not sure what you mean.."))
+    print(inference.predict.remote("huh?"))
+    print(inference.predict.remote("huh."))
+    print(inference.predict.remote("Why are gas giants so big?"))
+    print(inference.predict.remote("Studio ghibli films are the best!"))
+    print(inference.predict.remote("My bus missed my stop again. Why are these busses so unreliable!!"))
+    print(inference.predict.remote("My interview is in 2 minutes and I didnt prepare. WHat am I gonna do?"))
+
+
 
 # test it once
 # modal run inference.py

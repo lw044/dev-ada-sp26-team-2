@@ -14,6 +14,7 @@ def train():
 
     df = pd.read_csv("/data/data_cleaned.csv")
 
+
     train_df = df.sample(frac=0.9, random_state=42)
     val_df = df.drop(train_df.index) #split into training and validation data
     train_df = train_df.reset_index(drop=True)
@@ -45,8 +46,35 @@ def train():
     train_dataset.set_format("torch", columns=["input_ids", "attention_mask", "labels"])
     val_dataset.set_format("torch", columns=["input_ids", "attention_mask", "labels"])
 
-    # load model
+    label2id = {
+    "sadness": 0,
+    "confusion": 1,
+    "love": 2,
+    "anger": 3,
+    "fear": 4,
+    "surprise": 5,
+    "neutral": 6,
+    "happiness": 7,
+    "disgust": 8,
+    "shame": 9,
+    "guilt": 10,
+    "sarcasm": 11,
+    "desire": 12
+    }
+
+    id2label = {v: k for k, v in label2id.items()} #convert LABLES back into words
+    
+
+     # load model
     model = AutoModelForSequenceClassification.from_pretrained("distilbert-base-uncased", num_labels=13)
+
+    model.config.label2id = label2id
+    model.config.id2label = id2label  
+
+
+
+    model.save_pretrained("/data/model_weights")
+    tokenizer.save_pretrained("/data/model_weights")  
 
     # training arguments
     args = TrainingArguments(

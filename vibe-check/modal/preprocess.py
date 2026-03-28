@@ -12,8 +12,8 @@ from common import *
 def preprocess():
     import pandas as pd
     import re 
-    # just the first 10k rows of the dataset !!
-    df = pd.read_csv("/data/data_10k.csv")
+    
+    df = pd.read_csv("/data/data_100k.csv")
     
     #convert labels to integers
     label_map = {
