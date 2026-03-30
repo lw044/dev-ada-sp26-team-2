@@ -1,5 +1,5 @@
 import sys
-sys.path.append("/Users/camillaforero/random coding/dev-ada-sp26-team-2/vibe-check/modal/inference.py")
+sys.path.append(".../vibe-check/modal/inference.py")
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
