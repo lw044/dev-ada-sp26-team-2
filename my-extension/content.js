@@ -12,7 +12,7 @@ document.addEventListener("mouseup", async() => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: selected })
       })
-    //const result = await Response.json()
+    //const rsult = await Response.json()
     showTooltip(rect, result.tone);
 });
 
@@ -31,3 +31,8 @@ function showTooltip(rect,tone) {
 document.addEventListener("mousedown", () => {
     document.getElementById("sentiment-tooltip")?.remove();
 })
+// "icons": {
+  //   "16": "icons/icon16.png",
+  //   "48": "icons/icon48.png",
+  //   "128": "icons/icon128.png"
+  // },
