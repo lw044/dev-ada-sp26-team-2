@@ -1,12 +1,10 @@
 from common import *
 from inference import Inference
-from fastapi import Request
+from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-web_app = modal.asgi_app()
-
-fastapi_app = __import__('fastapi').FastAPI()
+fastapi_app = FastAPI()
 
 fastapi_app.add_middleware(
     CORSMiddleware,
@@ -21,7 +19,7 @@ async def analyze(request: Request):
     text = data.get("text", "")
     inference = Inference()
     label = inference.predict.remote(text)
-    return {"tone": label}
+    return JSONResponse({"tone": label})
 
 @app.function(image=image)
 @modal.asgi_app()
