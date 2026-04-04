@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Vibe Check</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      width:280px; background:#08081a;
+      font-family:'DM Sans',system-ui,sans-serif;
+      color:#eeeeff; overflow:hidden;
+    }
+
+    /* header */
+    .hd{
+      padding:20px 20px 16px;
+      background: linear-gradient(160deg,#111130 0%,#08081a 100%);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+      display:flex; align-items:center; gap:12px;
+    }
+    .hd-icon{font-size:28px; line-height:1;}
+    .hd-title{font-size:16px;font-weight:700;letter-spacing:-0.3px;}
+    .hd-sub{font-size:11px;color:#555;margin-top:2px;}
+
+    /* body */
+    .bd{padding:16px 18px 20px;}
+
+    /* steps */
+    .steps{
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:14px; padding:14px; margin-bottom:14px;
+    }
+    .steps-title{
+      font-size:10px;text-transform:uppercase;letter-spacing:1.2px;
+      color:#6c57e8; margin-bottom:10px; font-weight:600;
+    }
+    .step{display:flex;align-items:flex-start;gap:9px;margin-bottom:7px;}
+    .step:last-child{margin-bottom:0;}
+    .sn{
+      background:#6c57e8;color:#fff;
+      width:18px;height:18px;border-radius:50%;
+      font-size:10px;font-weight:700;flex-shrink:0;
+      display:flex;align-items:center;justify-content:center;margin-top:1px;
+    }
+    .st{font-size:12px;color:#aaa;line-height:1.4;}
+    .st b{color:#ddd;}
+
+    /* textarea */
+    .lbl{font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:#6c57e8;font-weight:600;display:block;margin-bottom:6px;}
+    textarea{
+      width:100%;background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.09);
+      border-radius:12px;padding:10px 12px;
+      color:#e0e0ff;font-size:12px;resize:none;
+      height:68px;outline:none;font-family:inherit;
+      transition:border-color 0.2s; margin-bottom:10px;
+    }
+    textarea:focus{border-color:#6c57e8;}
+    textarea::placeholder{color:#333;}
+
+    /* button */
+    button{
+      width:100%;padding:10px;
+      background:linear-gradient(135deg,#6c57e8,#4a3cbe);
+      border:none;border-radius:12px;color:#fff;
+      font-size:13px;font-weight:600;cursor:pointer;
+      transition:opacity 0.15s,transform 0.15s;letter-spacing:0.1px;
+      font-family:inherit;
+    }
+    button:hover{opacity:0.88;transform:translateY(-1px);}
+    button:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
+
+    /* result */
+    .res{
+      display:none;margin-top:12px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:14px;padding:14px;
+      align-items:center;gap:12px;
+    }
+    .res.show{display:flex;}
+    .res-emoji{font-size:34px;flex-shrink:0;}
+    .res-label{font-size:16px;font-weight:700;}
+    .res-sub{font-size:11px;color:#555;margin-top:2px;}
+
+    /* spinner */
+    .spin{
+      width:22px;height:22px;border-radius:50%;flex-shrink:0;
+      background:conic-gradient(from 0deg,#6c57e8,#e86ca0,#6c57e8);
+      animation:sp 0.9s linear infinite;
+      mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#fff calc(100% - 2px));
+      -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#fff calc(100% - 2px));
+    }
+    @keyframes sp{to{transform:rotate(360deg)}}
+
+    .footer{font-size:10px;color:#2a2a3a;text-align:center;margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.03);}
+    code{background:rgba(255,255,255,0.05);padding:1px 5px;border-radius:4px;}
+  </style>
+</head>
+<body>
+  <div class="hd">
+    <div class="hd-icon">✨</div>
+    <div>
+      <div class="hd-title">Vibe Check</div>
+      <div class="hd-sub">AI Tone Detection</div>
+    </div>
+  </div>
+
+  <div class="bd">
+    <div class="steps">
+      <div class="steps-title">How to use</div>
+      <div class="step"><div class="sn">1</div><div class="st"><b>Highlight</b> text on any page — a button appears</div></div>
+      <div class="step"><div class="sn">2</div><div class="st">Click <b>✨ Vibe Check</b> or use the right-click menu</div></div>
+      <div class="step"><div class="sn">3</div><div class="st">Or paste text below and hit <b>Analyze</b></div></div>
+    </div>
+
+    <label class="lbl">Paste text</label>
+    <textarea id="inp" placeholder="Type or paste something…"></textarea>
+    <button id="btn">Analyze Tone</button>
+
+    <div class="res" id="res">
+      <div class="spin" id="spin"></div>
+      <div class="res-emoji" id="emoji" style="display:none"></div>
+      <div>
+        <div class="res-label" id="rlabel">Analyzing…</div>
+        <div class="res-sub"   id="rsub">Contacting backend</div>
+      </div>
+    </div>
+
+    <div class="footer">endpoint: <code>YOUR-APP.modal.run</code></div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
