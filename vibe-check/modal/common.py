@@ -9,8 +9,14 @@ image = modal.Image.debian_slim().pip_install(
     "transformers",
     "datasets",
     "torch",
+<<<<<<< Updated upstream
     "accelerate",
     "fastapi[standard]"   # middle layer between trainer and PyTorch
+=======
+    "accelerate"    # middle layer between trainer and PyTorch
+    "fastapi",        # ← add this
+    "python-multipart"
+>>>>>>> Stashed changes
 ).add_local_python_source("common")
 
 # define volume to store model weights (like a USB drive for the container)

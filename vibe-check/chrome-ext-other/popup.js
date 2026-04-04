@@ -10,7 +10,7 @@ const TONES = {
     shame:9,guilt:10,sarcasm:11,desire:12
   };
   
-  const API_URL = "https://YOUR-APP.modal.run/analyze";
+  const API_URL = "https://omuley--tone-classifier-inference-predict-web.modal.run";
   
   const btn   = document.getElementById("btn");
   const inp   = document.getElementById("inp");
