@@ -21,12 +21,17 @@ class Inference:
     @modal.method()
     def predict(self, text: str):
         result = self.pipe(text)
-
         emotion = result[0]["label"]
-
         return emotion
 
+    @modal.web_endpoint(method="POST")
+    def predict_web(self, text: str):
+        return self.predict.remote(text)
+    
+
 @app.local_entrypoint()
+
+
 def main():
     inference = Inference()
     print(inference.predict.remote("I don't like pointers or trees!!!!!!!!"))
@@ -42,8 +47,6 @@ def main():
     print(inference.predict.remote("Studio ghibli films are the best!"))
     print(inference.predict.remote("My bus missed my stop again. Why are these busses so unreliable!!"))
     print(inference.predict.remote("My interview is in 2 minutes and I didnt prepare. WHat am I gonna do?"))
-
-
 
 # test it once
 # modal run inference.py
