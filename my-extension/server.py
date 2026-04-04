@@ -12,4 +12,4 @@ def analyze():
     score = predict_sentiment(text)
     return jsonify({ "score": score })
 
-app.run(port=5000)
+app.run(host="localhost", port=5000)
