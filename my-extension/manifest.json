@@ -4,7 +4,10 @@
   "version": "1.0",
   "description": "Highlights text and analyzes tone",
   "permissions": [],
-  "host_permissions": ["https://omuley--tone-classifier-inference-predict-web.modal.run/*"],
+  "host_permissions": [
+    "https://omuley--tone-classifier-inference-predict-web.modal.run/*",
+    "http://localhost:5000/*"
+  ],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
