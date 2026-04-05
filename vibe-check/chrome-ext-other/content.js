@@ -49,11 +49,15 @@ const TONES = {
   function kickOff(text) {
     killFloatBtn();
     showOverlay("loading", null, text);
-    chrome.runtime.sendMessage({ type: "ANALYZE", text }, res => {
-      if (chrome.runtime.lastError || !res) return showOverlay("error", null, text, "Extension error");
-      if (res.error) return showOverlay("error", null, text, res.error);
-      showOverlay("result", res.toneId, text);
-    });
+    try {
+      chrome.runtime.sendMessage({ type: "ANALYZE", text }, res => {
+        if (chrome.runtime.lastError || !res) return showOverlay("error", null, text, "Extension error");
+        if (res.error) return showOverlay("error", null, text, res.error);
+        showOverlay("result", res.toneId, text);
+      });
+    } catch(e) {
+      showOverlay("error", null, text, "Please refresh the page and try again.");
+    }
   }
   
   // ── Listen from background (context menu path) ───────────────────────────────
