@@ -4,9 +4,10 @@
     "version": "1.0",
     "description": "Highlight any text to detect its emotional tone.",
     "permissions": ["activeTab", "scripting", "contextMenus"],
-    "host_permissions": ["https://omuley--tone-classifier-inference-predict-web.modal.run/*", "<all_urls>"],
+    "host_permissions": ["https://omuley--tone-classifier-analyze.modal.run/*"],
     "background": {
-      "service_worker": "background.js"
+      "service_worker": "background.js",
+      "type": "module"
     },
     "content_scripts": [
       {

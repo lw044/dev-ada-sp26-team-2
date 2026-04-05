@@ -1,5 +1,5 @@
 // ── SWAP THIS URL WHEN YOUR MODAL ENDPOINT IS LIVE ──────────────────────────
-const API_URL = "https://omuley--tone-classifier-inference-predict-web.modal.run";
+const API_URL = "https://omuley--tone-classifier-analyze.modal.run";
 // ─────────────────────────────────────────────────────────────────────────────
 
 const TONE_MAP = {
